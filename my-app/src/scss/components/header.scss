@@ -1,0 +1,16 @@
+.header {
+  height: 45px;
+  border-bottom: 1px solid #f3f3f3;
+  color: #ffffff;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  .header__title {
+  margin-left: 45px;
+  }
+  .header__sort {
+    margin-left: auto;
+    margin-right: 50px;
+    cursor: pointer;
+  }
+}

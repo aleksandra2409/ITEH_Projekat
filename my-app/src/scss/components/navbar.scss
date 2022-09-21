@@ -1,0 +1,23 @@
+.navbar {
+  width: 220px;
+  height: calc(100% - 45px);
+  float: left;
+  background: #909090;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #f3f3f3;
+  &__row {
+    width: 100%;
+    font-size: 18px;
+    color: #f3f3f3;
+    padding: 20px 30px;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background: #292929;
+    }
+  }
+  .active {
+    background: #292929;
+  }
+}

@@ -1,0 +1,36 @@
+.login {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background: url("../../assets/movie-logo.png") no-repeat left;
+
+
+  &__left-side {
+    flex: 0 0 50%;
+  }
+  &__right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 50%;
+  }
+  &__title {
+    font-size: 24px;
+    margin-bottom: 35px;
+  }
+  &__form {
+    background-color: #ffffff;
+    width: 500px;
+    padding: 30px 50px;
+    border-radius: 10px;
+  }
+  &__logo {
+    width: 300px;
+    height: 300px;
+  }
+  &__submit {
+    margin-top: 35px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

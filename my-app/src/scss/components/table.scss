@@ -1,0 +1,15 @@
+.table-data {
+    height: calc(100% - 45px);
+    display: flex;
+  flex-direction: column;
+  &__title {
+    color: #f3f3f3;
+
+    font-size: 24px;
+    margin: 30px;
+  }
+  &__content {
+    margin: 30px;
+    height: 100%;
+  }
+}

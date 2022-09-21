@@ -1,0 +1,10 @@
+.movies {
+  height: calc(100vh - 45px);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 15px;
+  justify-content: center;
+  overflow-y: auto;
+}

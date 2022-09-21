@@ -1,0 +1,26 @@
+.movie__box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-between;
+  background: #909090;
+  color: #ffffff;
+  width: 200px;
+  padding: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  max-height: 300px;
+  .movie__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .movie__genre {
+    font-size: 10px;
+  }
+  .movie__year {
+    font-size: 10px;
+  }
+  .movie__description {
+    font-size: 14px;
+  }
+}

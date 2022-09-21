@@ -1,0 +1,31 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #292929;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
