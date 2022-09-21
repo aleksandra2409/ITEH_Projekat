@@ -7,7 +7,7 @@ export default function Home(props) {
       <div className="movies">
         {props.movies?.map((movie, index) => {
           return (
-            <MovieBox movie={movie} key={index} openMovie={props.openMovie} />
+            <MovieBox movie={movie} key={index} openMovieModal ={props.openMovieModal } />
           );
         })}
       </div>

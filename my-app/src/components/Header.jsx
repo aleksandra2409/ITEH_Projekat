@@ -5,7 +5,12 @@ export default function Header(props) {
   return (
     <div className="header">
       <div className="header__title">Movie App</div>
-      {location.pathname !== "/movie" && (
+      {location.pathname === "/" && props?.user?.admin === 1 && (
+        <div className="header__sort" onClick={() => props.setMovieModal(true)}>
+          Create Movie
+        </div>
+      )}
+      {location.pathname === "/" && (
         <div className="header__sort" onClick={() => props.handleSort()}>
           Sort
         </div>

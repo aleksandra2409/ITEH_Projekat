@@ -9,13 +9,16 @@ import Home from "./pages/Home";
 import Genres from "./pages/Genres";
 import Producers from "./pages/Producers";
 import Login from "./pages/Login";
+import AddMovieModal from "./components/AddMovieModal";
 
 function App() {
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(null);
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [producers, setProducers] = useState([]);
   const [user, setUser] = useState({});
+
+  const [movieModal, setMovieModal] = useState(false);
 
   const [error, setError] = useState(false);
   const [errorType, setErrorType] = useState("");
@@ -30,7 +33,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    token === "" && navigate("/login")
+    token === "" && navigate("/login");
     callMovies();
     callGenres();
     callProducers();
@@ -41,16 +44,16 @@ function App() {
       const filteredMovies = movies.filter((movie) => {
         return movie.user.id === user.id;
       });
-      console.log(filteredMovies)
+      console.log(filteredMovies);
       setMovies(filteredMovies);
     }
   }, [user]);
 
   let navigate = useNavigate();
 
-  const openMovie = (movie) => {
-    navigate("/movie");
+  const openMovieModal = (movie) => {
     setMovie(movie);
+    setMovieModal(true);
   };
 
   const callMovies = async () => {
@@ -168,19 +171,69 @@ function App() {
       });
   };
 
+  const addMovie = (movieData) => {
+    axios
+      .post("http://127.0.0.1:8000/api/movies", movieData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(function (response) {
+        setMovieModal(false);
+        setError(false);
+        callMovies();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const updateMovie = (movieData) => {
+    axios
+      .put("http://127.0.0.1:8000/api/movies/" + movie.id, movieData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(function (response) {
+        setMovieModal(false);
+        setError(false);
+        callMovies();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       {location.pathname !== "/login" ? (
-        <Header handleSort={handleSort} />
+        <Header
+          handleSort={handleSort}
+          setMovieModal={setMovieModal}
+          user={user}
+        />
       ) : null}
-      {location.pathname !== "/login" && user.admin === 1 ? (
-        <Navbar handleLogout={handleLogout} />
+      {location.pathname !== "/login" ? (
+        <Navbar handleLogout={handleLogout} user={user} />
       ) : null}
+      {movieModal === true && (
+        <AddMovieModal
+          movie={movie}
+          setMovie={setMovie}
+          movieModal={movieModal}
+          setMovieModal={setMovieModal}
+          addMovie={addMovie}
+          updateMovie={updateMovie}
+        />
+      )}
       <Routes>
         <Route
           path="/"
           element={
-            token !== "" && <Home movies={movies} openMovie={openMovie} />
+            token !== "" && (
+              <Home movies={movies} openMovieModal={openMovieModal} />
+            )
           }
         />
         <Route path="/genres" element={<Genres genres={genres} />} />

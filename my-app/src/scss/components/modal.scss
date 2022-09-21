@@ -1,0 +1,92 @@
+.ReactModal__Overlay {
+  display: flex;
+  justify-content: center;
+  .add-modal {
+    position: absolute;
+    top: 70px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    background: #f3f3f3;
+    padding: 30px;
+    font-size: 24px;
+    border-radius: 5px;
+    border: none !important;
+    outline: none !important;
+    .modal__header {
+      margin-bottom: 25px;
+      color: #909090;
+    }
+    .modal__data {
+      display: flex;
+      flex-direction: column;
+      .modal__row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        .modal__label {
+          font-size: 18px;
+          color: #909090;
+        }
+        .modal__input {
+          width: 100%;
+          .modal__react-select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #909090;
+            color: #909090;
+          }
+
+          input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #909090;
+            color: #909090;
+          }
+          ::placeholder {
+            color: #909090;
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .modal__footer {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      .save__button {
+        width: 100px;
+        background-color: #549fa4;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 14px;
+        margin-left: auto;
+        &:focus,
+        &:hover {
+          background-color: #4d6066;
+        }
+      }
+      .delete__button {
+        width: 100px;
+        background-color: #d32f2f;
+        color: #f3f3f3;
+        padding: 10px 20px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 14px;
+        &:focus,
+        &:hover {
+          background-color: #8c1717;
+        }
+      }
+    }
+  }
+}

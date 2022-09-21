@@ -13,24 +13,31 @@ export default function Navbar(props) {
       >
         Movies
       </div>
-      <div
-        className={
-          location.pathname === "/genres" ? "navbar__row active" : "navbar__row"
-        }
-        onClick={() => navigate("/genres")}
-      >
-        Genres
-      </div>
-      <div
-        className={
-          location.pathname === "/producers"
-            ? "navbar__row active"
-            : "navbar__row"
-        }
-        onClick={() => navigate("/producers")}
-      >
-        Producers
-      </div>
+      {props.user?.admin === 1 ? (
+        <div
+          className={
+            location.pathname === "/genres"
+              ? "navbar__row active"
+              : "navbar__row"
+          }
+          onClick={() => navigate("/genres")}
+        >
+          Genres
+        </div>
+      ) : null}
+      {props.user?.admin === 1 ? (
+        <div
+          className={
+            location.pathname === "/producers"
+              ? "navbar__row active"
+              : "navbar__row"
+          }
+          onClick={() => navigate("/producers")}
+        >
+          Producers
+        </div>
+      ) : null}
+
       <div className="navbar__row" onClick={props.handleLogout}>
         Logout
       </div>
