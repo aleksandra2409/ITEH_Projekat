@@ -172,25 +172,77 @@ function App() {
   };
 
   const addMovie = (movieData) => {
-    axios
-      .post("http://127.0.0.1:8000/api/movies", movieData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(function (response) {
-        setMovieModal(false);
-        setError(false);
-        callMovies();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    console.log(movieData)
+    if (movieData.name === "") {
+      setError(true);
+      setErrorType("name");
+    } else if (movieData.description === "") {
+      setError(true);
+      setErrorType("description");
+    } else if (movieData.year === "") {
+      setError(true);
+      setErrorType("year");
+    } else if (movieData.genre_id === "") {
+      setError(true);
+      setErrorType("genre");
+    } else if (movieData.producer_id === "") {
+      setError(true);
+      setErrorType("producer");
+    } else {
+      axios
+        .post("http://127.0.0.1:8000/api/movies", movieData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(function (response) {
+          setMovieModal(false);
+          setError(false);
+          callMovies();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
   const updateMovie = (movieData) => {
+    if (movieData.name === "") {
+      setError(true);
+      setErrorType("name");
+    } else if (movieData.description === "") {
+      setError(true);
+      setErrorType("description");
+    } else if (movieData.year === "") {
+      setError(true);
+      setErrorType("year");
+    } else if (movieData.genre_id === "") {
+      setError(true);
+      setErrorType("genre");
+    } else if (movieData.producer_id === "") {
+      setError(true);
+      setErrorType("producer");
+    } else {
+      axios
+        .put("http://127.0.0.1:8000/api/movies/" + movie.id, movieData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(function (response) {
+          setMovieModal(false);
+          setError(false);
+          callMovies();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
+
+  const deleteMovie = () => {
     axios
-      .put("http://127.0.0.1:8000/api/movies/" + movie.id, movieData, {
+      .delete("http://127.0.0.1:8000/api/movies/" + movie.id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -225,6 +277,12 @@ function App() {
           setMovieModal={setMovieModal}
           addMovie={addMovie}
           updateMovie={updateMovie}
+          deleteMovie={deleteMovie}
+          genres={genres}
+          producers={producers}
+          error={error}
+          errorType={errorType}
+          setError={setError}
         />
       )}
       <Routes>

@@ -1,6 +1,11 @@
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+
+import MenuItem from "@mui/material/MenuItem";
 
 export default function AddMovieModal(props) {
   const [name, setName] = useState("");
@@ -35,6 +40,7 @@ export default function AddMovieModal(props) {
   const handleCloseModal = () => {
     props.setMovieModal(false);
     props.setMovie(null);
+    props.setError(false)
   };
   const handleAddMovie = () => {
     let bodyData = {
@@ -56,7 +62,9 @@ export default function AddMovieModal(props) {
     };
     props.updateMovie(bodyData);
   };
-  const handleDeleteMovie = () => {};
+  const handleDeleteMovie = () => {
+    props.deleteMovie();
+  };
   return (
     <div>
       <Modal
@@ -90,6 +98,7 @@ export default function AddMovieModal(props) {
               name="name"
               value={name}
               onChange={handleInputValue}
+              error={props.error && props.errorType === "name"}
             />
           </div>
           <div className="modal__row">
@@ -105,6 +114,7 @@ export default function AddMovieModal(props) {
               name="description"
               value={description}
               onChange={handleInputValue}
+              error={props.error && props.errorType === "description"}
             />
           </div>
           <div className="modal__row">
@@ -120,35 +130,66 @@ export default function AddMovieModal(props) {
               name="year"
               value={year}
               onChange={handleInputValue}
+              error={props.error && props.errorType === "year"}
             />
           </div>
           <div className="modal__row">
-            <TextField
-              id="outlined-basic"
-              label="Genre"
-              variant="outlined"
-              required={true}
+            <FormControl
+              sx={{ marginTop: "30px" }}
               fullWidth={true}
-              sx={{
-                marginTop: "30px",
-              }}
-              name="genre"
-              onChange={handleInputValue}
-            />
+              error={props.error && props.errorType === "genre"}
+            >
+              <InputLabel id="demo-simple-select-required-label ">
+                Genre
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-required-label"
+                id="demo-simple-select-helper"
+                value={genreId}
+                label="Genre"
+                required={true}
+                fullWidth={true}
+                name="genre"
+                onChange={handleInputValue}
+              >
+                {props.genres.map((genre) => {
+                  return (
+                    <MenuItem value={genre.id} key={genre.id}>
+                      <em>{genre.name}</em>
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
           </div>
           <div className="modal__row">
-            <TextField
-              id="outlined-basic"
-              label="Producer"
-              variant="outlined"
-              required={true}
+            <FormControl
+              sx={{ marginTop: "30px" }}
               fullWidth={true}
-              sx={{
-                marginTop: "30px",
-              }}
-              name="producer"
-              onChange={handleInputValue}
-            />
+              error={props.error && props.errorType === "producer"}
+            >
+              <InputLabel id="demo-simple-select-required-label ">
+                Producers
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-required-label"
+                id="demo-simple-select-helper"
+                value={producerId}
+                label="Producers"
+                required={true}
+                fullWidth={true}
+                name="producer"
+                onChange={handleInputValue}
+              >
+                {props.producers.map((producer) => {
+                  return (
+                    <MenuItem value={producer.id} key={producer.id}>
+                      <em>{producer.name}</em>
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
           </div>
           <div className="modal__footer">
             {props.movie !== null ? (
